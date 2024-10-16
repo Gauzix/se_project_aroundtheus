@@ -7,11 +7,7 @@
   padding: 45px 0 41px;
 }
 
-@media screen and (max-width: 880px) {
-  .header {
-    width: 100vw;
-  }
-
+@media screen and (max-width: 635px) {
   .header__image {
     padding-left: 27px;
   }
