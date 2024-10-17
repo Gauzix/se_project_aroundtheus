@@ -15,7 +15,7 @@ responsive design of a webpage when displayed on popular screen sizes.
 
 - HTML and CSS
 - Grid and Flexbox CSS properties for responsive design
-- Media Queries and svh scaling
+- Media Queries and svg scaling
 
 **Video Overview**
 
