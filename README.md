@@ -1,23 +1,22 @@
-# Project 3: Around The U.S.
+# Around The U.S.
 
 ### Overview
 
-- Intro
-- Figma
-- Images
+- Description
+- Technology Used
+- Video Overview
 
 **Intro**
 
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+This project is a gallery page of images around the U.S. It is made to utilize
+responsive design of a webpage when displayed on popular screen sizes.
 
-**Figma**
+**Technology Used**
 
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+- HTML and CSS
+- Grid and Flexbox CSS properties for responsive design
+- Media Queries and svh scaling
 
-**Images**
+**Video Overview**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
-
-Good luck and have fun!
-
-Video review: https://drive.google.com/file/d/1ZBf2m8XizBghsolTnpybcUiffy4fx01W/view?usp=sharing
+https://drive.google.com/file/d/1ZBf2m8XizBghsolTnpybcUiffy4fx01W/view?usp=sharing
