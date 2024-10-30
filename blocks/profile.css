@@ -11,8 +11,8 @@
     "title button"
     "description description";
   grid-template-columns: minmax(auto, 373px) auto;
-  max-width: 373px;
-
+  gap: 7px 18px;
+  align-items: center;
   white-space: nowrap;
 }
 
@@ -21,8 +21,6 @@
   height: 24px;
   width: 24px;
   grid-area: button;
-  margin: 15px 0 9px 18px;
-  align-self: center;
   padding: 0;
   border: 1px solid #fff;
 }
@@ -47,11 +45,25 @@
 }
 
 .profile__title {
-  font-size: 42px;
+  font-size: 41px;
   line-height: 48px;
   font-weight: 500;
   grid-area: title;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.profile__description {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  grid-area: description;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__image {
@@ -59,25 +71,13 @@
   width: 120px;
   border-radius: 50%;
   object-fit: cover;
-  background-position: center;
   margin-right: 30px;
-}
-
-.profile__description {
-  font-size: 1.125em;
-  line-height: 22px;
-  font-weight: 400;
-  grid-area: description;
-  margin: 0;
-  /*The following 4 lines of code are to prevent format issues if more text is added*/
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 775px) {
   .profile__info {
     max-width: 225px;
+    gap: 0 10px;
   }
 
   .profile__description {
@@ -91,7 +91,6 @@
   .profile__edit-button {
     height: 18px;
     width: 18px;
-    margin: 4px 0 0 10px;
   }
 }
 
