@@ -37,7 +37,11 @@
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            id="card-add-button"
+            type="button"
+          ></button>
         </section>
 
         <section class="cards page__section">
@@ -48,27 +52,48 @@
         <p class="footer__text">© 2022 Around The U.S.</p>
       </footer>
     </div>
-
+    <!-- Edit Profile Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
-        <form class="modal__form">
+        <form class="modal__form" id="profile-edit-form">
           <input
             type="text"
             name="title"
-            class="modal__input"
-            id="profile-title-input"
-            placeholder="Title"
+            class="modal__input modal__input_type_name"
+            placeholder="Name"
           />
           <input
             type="text"
             name="description"
-            class="modal__input"
+            class="modal__input modal__input_type_description"
             id="profile-description-input"
             placeholder="Description"
           />
           <button class="modal__button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- Add Card Modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">New place</h2>
+        <form class="modal__form" id="add-card-form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__input_type_title"
+            placeholder="Title"
+          />
+          <input
+            type="url"
+            name="url"
+            class="modal__input modal__input_type_url"
+            placeholder="Image link"
+          />
+          <button class="modal__button" type="submit">Create</button>
         </form>
       </div>
     </div>

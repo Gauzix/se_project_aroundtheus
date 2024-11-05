@@ -29,15 +29,23 @@ const initialCards =[
 /*                                  Elements                                  */
 /* -------------------------------------------------------------------------- */
 const profileEditModal = document.querySelector('#profile-edit-modal');
-const profileEditForm = profileEditModal.querySelector('.modal__form');
+const profileEditForm = profileEditModal.querySelector('#profile-edit-form');
 const profileEditClose = profileEditModal.querySelector('.modal__close');
 const profileEditBtn = document.querySelector('#profile-edit-button');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const profileTitleInput = document.querySelector('#profile-title-input');
-const profileDescriptionInput = document.querySelector('#profile-description-input');
+const profileTitleInput = document.querySelector('.modal__input_type_name');
+const profileDescriptionInput = document.querySelector('.modal__input_type_description');
 const cardListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
+
+const cardAddModal = document.querySelector('#add-card-modal');
+const cardAddForm = cardAddModal.querySelector('#add-card-form');
+const cardAddClose = cardAddModal.querySelector('.modal__close');
+const cardAddBtn = document.querySelector('#card-add-button');
+const cardTitleInput = document.querySelector('#card-title-input');
+const cardImageInput = document.querySelector('#card-image-input');
+
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -51,10 +59,6 @@ function getCardElement(cardData) {
     const cardImageEl = cardElement.querySelector('.card__image');
     const cardTitleEl = cardElement.querySelector('.card__title');
 
-    /* set the path to the image to the link field of the object
-set the image alt text to the name field of the object
-set the card title to the name field of the object, too
-    cardTitleEl.textContent = cardData.name; */
     cardImageEl.src = cardData.link;
     cardImageEl.alt = cardData.name;
     cardTitleEl.textContent = cardData.name;
@@ -68,6 +72,14 @@ function handleProfileEditSubmit (evt){
     evt.preventDefault();
     profileTitle.textContent = profileTitleInput.value;
     profileDescription.textContent = profileDescriptionInput.value;
+    closePopup();
+}
+
+function handleCardAddSubmit (evt){
+    evt.preventDefault();
+    getCardElement()
+    profileTitle.textContent = cardTitleInput.value;
+    profileDescription.src = cardImageInput.value;
     closePopup();
 }
 
@@ -89,3 +101,21 @@ initialCards.forEach((cardData) => {
     const cardElement = getCardElement(cardData);
     cardListEl.append(cardElement);
 });
+
+/* Copy to edit for profileAddButton
+cardAddBtn.addEventListener('click', () => {
+    profileTitleInput.value = profileTitle.textContent;
+    profileDescriptionInput.value = profileDescription.textContent;
+    profileEditModal.classList.add('modal_opened');
+}
+);
+
+profileEditClose.addEventListener('click', closePopup);
+
+profileEditForm.addEventListener('submit', handleProfileEditSubmit);
+
+initialCards.forEach((cardData) => {
+    const cardElement = getCardElement(cardData);
+    cardListEl.append(cardElement);
+});
+*/
