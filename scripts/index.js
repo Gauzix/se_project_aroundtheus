@@ -62,7 +62,7 @@ function openModal(modal){
 
 function closeModal(modal){
     modal.classList.remove('modal_opened');
-}
+} 
 
 function renderCard(cardData, wrapper) {
     const cardElement = getCardElement(cardData);
@@ -117,6 +117,23 @@ function handleAddCardSubmit (evt){
     closeModal(cardAddModal);
 }
 
+function escModal(evt) {
+    if (evt.key === "Escape") {
+      const modal = document.querySelector(".modal_opened");
+      closeModal(modal);
+    }
+}
+
+function handleOverlayClick(evt) {
+    const isClickOutsideModalContainer = !evt.target.closest('.modal__container');
+    const isClickOutsideImageContainer = !evt.target.closest('.modal__preview-container');
+    const modal = document.querySelector(".modal_opened");
+
+    if (isClickOutsideModalContainer && isClickOutsideImageContainer) {
+      closeModal(modal);
+    }
+}
+
 /* -------------------------------------------------------------------------- */
 /*                              Event Listeners                              */
 /* -------------------------------------------------------------------------- */
@@ -133,6 +150,16 @@ cardAddClose.addEventListener('click', () => closeModal(cardAddModal));
 cardAddForm.addEventListener('submit', handleAddCardSubmit);
 previewImageClose.addEventListener('click', () => closeModal(previewImageModal));
 
+// Closing event listeners
+document.addEventListener('keydown', (evt) => escModal(evt));
+previewImageModal.addEventListener('click', (evt) => handleOverlayClick(evt));
+cardAddModal.addEventListener('click', (evt) => handleOverlayClick(evt));
+profileEditModal.addEventListener('click', (evt) => handleOverlayClick(evt));
+
+
+/* -------------------------------------------------------------------------- */
+/*                             Gallery Initializer                            */
+/* -------------------------------------------------------------------------- */
 initialCards.forEach((cardData) => {
     renderCard(cardData, cardListEl);
 });
