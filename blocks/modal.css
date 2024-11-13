@@ -67,7 +67,7 @@
   line-height: 17px;
   font-size: 14px;
   font-weight: 400;
-  padding: 0 0 10px;
+  padding: 5px 0 10px;
 }
 
 .modal__input_type_error {
@@ -80,6 +80,8 @@
   color: #ff0000;
   opacity: 0;
   transition: opacity 0.3s;
+  max-width: 358px;
+  height: 30px;
 }
 
 .modal__error_visible {

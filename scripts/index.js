@@ -61,7 +61,10 @@ function openModal(modal){
 }
 
 function closeModal(modal){
-    modal.classList.remove('modal_opened');
+    // adding modal wrapper check so escModal will only check classList when modal is open
+    if(modal){
+        modal.classList.remove('modal_opened');
+    }
 } 
 
 function renderCard(cardData, wrapper) {
