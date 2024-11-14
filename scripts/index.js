@@ -32,7 +32,6 @@ const initialCards =[
 // Profile Modal Elements
 const profileEditModal = document.querySelector('#profile-edit-modal');
 const profileEditForm = profileEditModal.querySelector('#profile-edit-form');
-const profileEditClose = profileEditModal.querySelector('.modal__close');
 const profileEditBtn = document.querySelector('#profile-edit-button');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
@@ -44,13 +43,11 @@ const cardListEl = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('#card-template').content.firstElementChild;
 const cardAddModal = document.querySelector('#add-card-modal');
 const cardAddForm = cardAddModal.querySelector('#add-card-form');
-const cardAddClose = cardAddModal.querySelector('.modal__close');
 const cardAddBtn = document.querySelector('#card-add-button');
 const cardTitleInput = document.querySelector('.modal__input_type_title');
 const cardUrlInput = document.querySelector('.modal__input_type_url');
 const previewImageModal = document.querySelector('#preview-image-modal');
 const previewImage = document.querySelector('.modal__preview-image');
-const previewImageClose = previewImageModal.querySelector('.modal__close');
 const previewHeading = previewImageModal.querySelector('.modal__preview-heading');
 
 /* -------------------------------------------------------------------------- */
@@ -58,13 +55,14 @@ const previewHeading = previewImageModal.querySelector('.modal__preview-heading'
 /* -------------------------------------------------------------------------- */
 function openModal(modal){
     modal.classList.add('modal_opened');
+    document.addEventListener("keydown", closeModalEsc);
+    modal.addEventListener("mousedown", closeOverlay);
 }
 
 function closeModal(modal){
-    // adding modal wrapper check so escModal will only check classList when modal is open
-    if(modal){
-        modal.classList.remove('modal_opened');
-    }
+    modal.classList.remove('modal_opened');
+    document.removeEventListener("keydown", closeModalEsc);
+    modal.removeEventListener("mousedown", closeOverlay);
 } 
 
 function renderCard(cardData, wrapper) {
@@ -115,25 +113,21 @@ function handleAddCardSubmit (evt){
         name: cardTitleInput.value,
         link: cardUrlInput.value
     }
-    const cardElement = getCardElement(newCard);
-    cardListEl.prepend(cardElement);
+    renderCard(newCard, cardListEl)
+    evt.target.reset();
     closeModal(cardAddModal);
 }
 
-function escModal(evt) {
+function closeModalEsc(evt) {
     if (evt.key === "Escape") {
       const modal = document.querySelector(".modal_opened");
       closeModal(modal);
     }
 }
 
-function handleOverlayClick(evt) {
-    const isClickOutsideModalContainer = !evt.target.closest('.modal__container');
-    const isClickOutsideImageContainer = !evt.target.closest('.modal__preview-container');
-    const modal = document.querySelector(".modal_opened");
-
-    if (isClickOutsideModalContainer && isClickOutsideImageContainer) {
-      closeModal(modal);
+function closeOverlay(evt) {
+    if (evt.target.classList.contains("modal")) {
+        closeModal(evt.target);
     }
 }
 
@@ -145,20 +139,21 @@ profileEditBtn.addEventListener('click', () => {
     profileDescriptionInput.value = profileDescription.textContent;
     openModal(profileEditModal)
 });
-profileEditClose.addEventListener('click', () => closeModal(profileEditModal));
 profileEditForm.addEventListener('submit', handleProfileEditSubmit);
-
 cardAddBtn.addEventListener('click', () => openModal(cardAddModal));
-cardAddClose.addEventListener('click', () => closeModal(cardAddModal));
 cardAddForm.addEventListener('submit', handleAddCardSubmit);
-previewImageClose.addEventListener('click', () => closeModal(previewImageModal));
 
-// Closing event listeners
-document.addEventListener('keydown', (evt) => escModal(evt));
-previewImageModal.addEventListener('click', (evt) => handleOverlayClick(evt));
-cardAddModal.addEventListener('click', (evt) => handleOverlayClick(evt));
-profileEditModal.addEventListener('click', (evt) => handleOverlayClick(evt));
-
+const modals = document.querySelectorAll('.modal');
+modals.forEach((modal) => {
+    modal.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('modal_opened')) {
+            closeModal(modal);
+        }
+        if (evt.target.classList.contains('modal__close')) {
+          closeModal(modal);
+        }
+    })
+})
 
 /* -------------------------------------------------------------------------- */
 /*                             Gallery Initializer                            */
@@ -166,3 +161,4 @@ profileEditModal.addEventListener('click', (evt) => handleOverlayClick(evt));
 initialCards.forEach((cardData) => {
     renderCard(cardData, cardListEl);
 });
+
