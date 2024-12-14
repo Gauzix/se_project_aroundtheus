@@ -6,13 +6,13 @@ class FormValidator {
         this._inactiveButtonClass = config.inactiveButtonClass;
         this._inputErrorClass = config.inputErrorClass;
         this._errorClass = config.errorClass;
-
-        this._element = formElement;
+        this._form = formElement;
+        this._inputEls = Array.from(this._form.querySelectorAll(this._inputSelector));    
     }
 
     // private method to show an error
     _showInputError(inputElement, errorMessage) {
-        const errorElement = this._element.querySelector(`#${inputElement.id}-error`);
+        const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
 
         inputElement.classList.add(this._inputErrorClass);
         errorElement.textContent = errorMessage;
@@ -21,7 +21,7 @@ class FormValidator {
 
     // private method to hide an error
     _hideInputError(inputElement) {
-        const errorElement = this._element.querySelector(`#${inputElement.id}-error`);
+        const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
 
         inputElement.classList.remove(this._inputErrorClass);
         errorElement.textContent = '';
@@ -54,20 +54,23 @@ class FormValidator {
     }
 
     _hasInvalidInput() {
-        return this._inputSelector.array.forEach(inputEl => !inputEl.validity.valid);
+        return this._inputEls.some(
+            (inputEl) => !inputEl.validity.valid);
     };
 
     _setEventListeners() {
-        this._inputSelector.array.forEach(inputEl => {
-            inputEl.addEventListener('input', () => {
-                this._checkInputValidity(inputEl);
-                this._toggleButtonState();
-            });
+        this._toggleButtonState();
+
+        this._inputEls.forEach((inputEl) => {
+          inputEl.addEventListener("input", () => {
+            this._checkInputValidity(inputEl);
+            this._toggleButtonState();
+          });
         });
     };
 
     enableValidation() {
-        this._element.addEventListener('submit', (evt) => {
+        this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
         });
 

@@ -41,6 +41,7 @@ const defaultFormConfig = {
     inputErrorClass: "modal__input_type_error",
     errorClass: "modal__error_visible"
 }
+//Forms
 const editFormModalWindow = document.querySelector('#profile-edit-form');
 const cardFormModalWindow = document.querySelector('#add-card-form');
 // Two instaces of FormValidator
@@ -62,8 +63,6 @@ const profileDescriptionInput = document.querySelector('.modal__input_type_descr
 const cardListEl = document.querySelector('.cards__list');
 const cardAddModal = document.querySelector('#add-card-modal'); 
 const cardAddBtn = document.querySelector('#card-add-button');
-const cardTitleInput = document.querySelector('.modal__input_type_title');
-const cardUrlInput = document.querySelector('.modal__input_type_url');
 const previewImageModal = document.querySelector('#preview-image-modal');
 const previewImage = document.querySelector('.modal__preview-image');
 const previewHeading = previewImageModal.querySelector('.modal__preview-heading');
@@ -88,13 +87,11 @@ function renderCard(cardData, wrapper) {
     wrapper.prepend(cardElement.generateCard());
 };
 
-function handleImageClick() {
-    cardImageEl.addEventListener('click', () => {
-        previewImage.src = cardData.link;
-        previewImage.alt = cardData.name;
-        previewHeading.textContent = cardData.name;
-        openModal(previewImageModal);
-    });
+function handleImageClick(){
+    openModal(previewImageModal);
+    previewHeading.textContent = this._name;
+    previewImage.src = this._link;
+    previewImage.alt = this._name;
 };
 
 /* -------------------------------------------------------------------------- */
